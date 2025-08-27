@@ -25,6 +25,14 @@
     },
     "content": {
       "type": "richtext"
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "seoDescription": {
+      "type": "richtext",
+      "minLength": 160
     }
   }
 }

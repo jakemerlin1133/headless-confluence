@@ -539,6 +539,14 @@ export interface ApiServiceChildPageServiceChildPage
       Schema.Attribute.Private;
     parent_service: Schema.Attribute.Relation<'manyToOne', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
+    seoDescription: Schema.Attribute.RichText &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 160;
+      }>;
+    seoTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
     slug: Schema.Attribute.UID;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
