@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "comments",
+  "collectionName": "faqs",
   "info": {
-    "singularName": "comment",
-    "pluralName": "comments",
-    "displayName": "Comment"
+    "singularName": "faq",
+    "pluralName": "faqs",
+    "displayName": "FAQ"
   },
   "options": {
     "draftAndPublish": true

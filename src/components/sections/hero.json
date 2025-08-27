@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "displayName": "Hero"
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Subheading": {
+      "type": "string"
+    },
+    "CallToActionText": {
+      "type": "string"
+    },
+    "CallToActionLink": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

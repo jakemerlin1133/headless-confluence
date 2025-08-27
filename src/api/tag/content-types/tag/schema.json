@@ -10,13 +10,5 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
-  "attributes": {
-    "Name": {
-      "type": "string"
-    },
-    "Slug": {
-      "type": "uid",
-      "targetField": "Name"
-    }
-  }
+  "attributes": {}
 }

@@ -14,44 +14,38 @@
     "Title": {
       "type": "string"
     },
-    "Slug": {
+    "slug": {
       "type": "uid",
       "targetField": "Title"
     },
-    "Summary": {
-      "type": "string"
-    },
     "Content": {
-      "type": "blocks"
+      "type": "richtext"
     },
-    "Cover_Image": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "aiMeta": {
-      "type": "json"
-    },
-    "seoTitle": {
+    "SEO_Title": {
       "type": "string"
     },
-    "seoDescription": {
+    "SEO_Description": {
+      "type": "string"
+    },
+    "Excerpt": {
       "type": "string"
     },
     "Category": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "Article"
     },
-    "Tag": {
+    "FAQS": {
+      "type": "component",
+      "component": "shared.faqs",
+      "repeatable": false
+    },
+    "service": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tag.tag"
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "parents"
     }
   }
 }
