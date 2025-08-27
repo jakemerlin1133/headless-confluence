@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_child_pages",
+  "info": {
+    "singularName": "service-child-page",
+    "pluralName": "service-child-pages",
+    "displayName": "ServiceChildPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "parent_service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::page.page",
+      "inversedBy": "service_child_pages"
+    },
+    "content": {
+      "type": "richtext"
+    }
+  }
+}

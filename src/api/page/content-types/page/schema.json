@@ -35,6 +35,12 @@
         "sections.services-list",
         "sections.team"
       ]
+    },
+    "service_child_pages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-child-page.service-child-page",
+      "mappedBy": "parent_service"
     }
   }
 }

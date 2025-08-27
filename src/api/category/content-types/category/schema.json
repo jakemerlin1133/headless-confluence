@@ -19,12 +19,6 @@
     },
     "Description": {
       "type": "richtext"
-    },
-    "Article": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::article.article",
-      "inversedBy": "Category"
     }
   }
 }

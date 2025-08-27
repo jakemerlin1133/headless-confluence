@@ -410,42 +410,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
-  info: {
-    displayName: 'Article';
-    pluralName: 'articles';
-    singularName: 'article';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Category: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
-    Content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Excerpt: Schema.Attribute.String;
-    FAQS: Schema.Attribute.Component<'shared.faqs', false>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::article.article'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    SEO_Description: Schema.Attribute.String;
-    SEO_Title: Schema.Attribute.String;
-    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
-    slug: Schema.Attribute.UID<'Title'>;
-    Title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -457,7 +421,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Article: Schema.Attribute.Relation<'manyToOne', 'api::article.article'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -504,30 +467,6 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
-  collectionName: 'faqs';
-  info: {
-    displayName: 'FAQ';
-    pluralName: 'faqs';
-    singularName: 'faq';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiPagePage extends Struct.CollectionTypeSchema {
   collectionName: 'pages';
   info: {
@@ -564,6 +503,10 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
+    service_child_pages: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-child-page.service-child-page'
+    >;
     Slug: Schema.Attribute.UID;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -572,58 +515,32 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiServiceService extends Struct.CollectionTypeSchema {
-  collectionName: 'services';
+export interface ApiServiceChildPageServiceChildPage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'service_child_pages';
   info: {
-    displayName: 'Service';
-    pluralName: 'services';
-    singularName: 'service';
+    displayName: 'ServiceChildPage';
+    pluralName: 'service-child-pages';
+    singularName: 'service-child-page';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.RichText;
-    FAQS: Schema.Attribute.Component<'shared.faqs', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::service.service'
+      'api::service-child-page.service-child-page'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String;
-    parents: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    parent_service: Schema.Attribute.Relation<'manyToOne', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
-    Seo_Description: Schema.Attribute.String;
-    Seo_Title: Schema.Attribute.String;
-    Slug: Schema.Attribute.UID;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiTagTag extends Struct.CollectionTypeSchema {
-  collectionName: 'tags';
-  info: {
-    displayName: 'Tag';
-    pluralName: 'tags';
-    singularName: 'tag';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1140,13 +1057,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::article.article': ApiArticleArticle;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;
-      'api::faq.faq': ApiFaqFaq;
       'api::page.page': ApiPagePage;
-      'api::service.service': ApiServiceService;
-      'api::tag.tag': ApiTagTag;
+      'api::service-child-page.service-child-page': ApiServiceChildPageServiceChildPage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
