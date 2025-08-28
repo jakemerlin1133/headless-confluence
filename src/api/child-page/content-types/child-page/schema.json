@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "child_pages",
+  "info": {
+    "singularName": "child-page",
+    "pluralName": "child-pages",
+    "displayName": "ChildPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::page.page",
+      "inversedBy": "child_pages"
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "seoDescription": {
+      "type": "richtext",
+      "maxLength": 160
+    },
+    "grand_child_pages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::grand-child-page.grand-child-page",
+      "mappedBy": "parent"
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "service_child_pages",
+  "collectionName": "grand_child_pages",
   "info": {
-    "singularName": "service-child-page",
-    "pluralName": "service-child-pages",
-    "displayName": "ServiceChildPage"
+    "singularName": "grand-child-page",
+    "pluralName": "grand-child-pages",
+    "displayName": "GrandChildPage"
   },
   "options": {
     "draftAndPublish": true
@@ -17,22 +17,19 @@
     "slug": {
       "type": "uid"
     },
-    "parent_service": {
+    "parent": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::page.page",
-      "inversedBy": "service_child_pages"
-    },
-    "content": {
-      "type": "richtext"
+      "target": "api::child-page.child-page",
+      "inversedBy": "grand_child_pages"
     },
     "seoTitle": {
       "type": "string",
       "maxLength": 60
     },
     "seoDescription": {
-      "type": "richtext",
-      "minLength": 160
+      "type": "text",
+      "maxLength": 160
     }
   }
 }
